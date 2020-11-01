@@ -7,7 +7,7 @@ do shell script "mkdir -p " & quoted form of (POSIX path of outfolder)
 -- Let the user select which folders from Apple Notes to export
 
 tell application "Notes"
-	set folderNames to name of folders of account "iCloud"
+	set folderNames to name of folders of account "iCloud" #can also work if it's `in default account` or `in account "iCloud"` after `folders`
 	set chosenFolderNames to (choose from list folderNames with multiple selections allowed)
 	if (chosenFolderNames is false) then error number -128 -- Cancel button
 end tell
