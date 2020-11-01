@@ -7,7 +7,7 @@ do shell script "mkdir -p " & quoted form of (POSIX path of outfolder)
 -- Let the user select which folders from Apple Notes to export
 
 tell application "Notes"
-	set folderNames to name of folders
+	set folderNames to name of folders of account "iCloud"
 	set chosenFolderNames to (choose from list folderNames with multiple selections allowed)
 	if (chosenFolderNames is false) then error number -128 -- Cancel button
 end tell
@@ -89,7 +89,7 @@ type_: 2"
 		
 		delay 0.5 -- A little delay to help avoid hiccups
 		
-		do shell script "osascript -e 'the clipboard as Çclass RTF È' | perl -ne 'print chr foreach unpack(\"C*\",pack(\"H*\",substr($_,11,-3)))' | textutil -stdin -stdout -convert html -format rtf | pbcopy"
+		do shell script "osascript -e 'the clipboard as Â«class RTF Â»' | perl -ne 'print chr foreach unpack(\"C*\",pack(\"H*\",substr($_,11,-3)))' | textutil -stdin -stdout -convert html -format rtf | pbcopy"
 		
 		-- Raw HTML tool: Uncomment the section below to grab the original raw HTML of the current Apple note body. May help to identify what basic HTML formatting code would work for the note in Joplin, or potentially making this script better if someone wants to help with that, see README.
 		
