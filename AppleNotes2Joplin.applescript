@@ -19,12 +19,12 @@ repeat with i from 1 to (count chosenFolderNames)
 	set parent_id to do shell script "uuidgen | tr -d '-' | tr 'A-Z' 'a-z' "
 	
 	set thisFolderName to item i of chosenFolderNames
-	tell application "Notes" to set theNotes to notes of folder thisFolderName
+	tell application "Notes" to set theNotes to notes of folder thisFolderName of account "iCloud"
 	
 	do shell script "mkdir -p " & quoted form of (POSIX path of outfolder) & "/" & "resources/"
 	
 	tell application "Notes"
-		set localdirDate to the modification date of note 1 of folder thisFolderName
+		set localdirDate to the modification date of note 1 of folder thisFolderName of account "iCloud"
 	end tell
 	
 	set UTCdirdate to localdirDate - (time to GMT)
