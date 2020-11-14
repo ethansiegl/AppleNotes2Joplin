@@ -30,6 +30,10 @@ This has some very hacky code, but it does the job. It could be way cleaner, mor
 
 - Very occasionally, an Apple note can leave behind an incomplete HTML hyperlink tag for some reason (either just above or below the same link that is in tact). It converts to a half complete markdown link. Very rare, but I noticed it.
 
+### **Other things that need improving:**
+
+- The script doesn't automatically work if your system language isn't English. Change `Select All` and `Copy` in the script to your language equivalent. I don't have time to find a working way to 'select menu item 9' of what is the Edit menu, I tried for half an hour without success.
+
 ### **Read this before you run the script:**
 
 - All you need is macOS. (Tested on Catalina.) Nothing else. Not even Homebrew.
