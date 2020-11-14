@@ -7,7 +7,7 @@ do shell script "mkdir -p " & quoted form of (POSIX path of outfolder)
 -- Let the user select which folders from Apple Notes to export
 
 tell application "Notes"
-	set folderNames to name of folders of account "iCloud" #can also work if it's `in default account` - should update script to make user select which account in GUI so they don't have to manually edit in script which account
+	set folderNames to name of folders of account "On My Mac" #can also work if it's `in default account` - should update script to make user select which account in GUI so they don't have to manually edit in script which account
 	set chosenFolderNames to (choose from list folderNames with multiple selections allowed)
 	if (chosenFolderNames is false) then error number -128 -- Cancel button
 end tell
@@ -19,12 +19,12 @@ repeat with i from 1 to (count chosenFolderNames)
 	set parent_id to do shell script "uuidgen | tr -d '-' | tr 'A-Z' 'a-z' "
 	
 	set thisFolderName to item i of chosenFolderNames
-	tell application "Notes" to set theNotes to notes of folder thisFolderName of account "iCloud"
+	tell application "Notes" to set theNotes to notes of folder thisFolderName of account "On My Mac"
 	
 	do shell script "mkdir -p " & quoted form of (POSIX path of outfolder) & "/" & "resources/"
 	
 	tell application "Notes"
-		set localdirDate to the modification date of note 1 of folder thisFolderName of account "iCloud"
+		set localdirDate to the modification date of note 1 of folder thisFolderName of account "On My Mac"
 	end tell
 	
 	set UTCdirdate to localdirDate - (time to GMT)
@@ -63,7 +63,7 @@ type_: 2"
 		-- Open the folder in Notes.app interface
 		
 		tell application "Notes"
-			tell account "iCloud"
+			tell account "On My Mac"
 				tell folder thisFolderName
 					show note j
 				end tell
@@ -82,8 +82,8 @@ type_: 2"
 		
 		tell application "System Events"
 			tell process "Notes"
-				click menu item "Select All" of menu "Edit" of menu bar 1
-				click menu item "Copy" of menu "Edit" of menu bar 1
+				click menu item "Select All" of menu 4 of menu bar 1 #This should be converted to multilingual.
+				click menu item "Copy" of menu 4 of menu bar 1 #This should be converted to multilingual.
 			end tell
 		end tell
 		
@@ -94,7 +94,7 @@ type_: 2"
 		-- Raw HTML tool: Uncomment the section below to grab the original raw HTML of the current Apple note body. May help to identify what basic HTML formatting code would work for the note in Joplin, or potentially making this script better if someone wants to help with that, see README.
 		
 		(* tell application "Notes"
-			tell account "iCloud"
+			tell account "On My Mac"
 				tell folder thisFolderName
 					set rawbodyhtml to get the body of note j
 					display dialog rawbodyhtml
@@ -109,7 +109,7 @@ type_: 2"
 		set joplinid to do shell script "uuidgen | tr -d '-' | tr 'A-Z' 'a-z' "
 		
 		tell application "Notes"
-			tell account "iCloud"
+			tell account "On My Mac"
 				tell folder thisFolderName
 					set localcreateDate to get the creation date of note j
 				end tell
@@ -131,7 +131,7 @@ type_: 2"
 		set trzcsecs to text -2 thru -1 of ("0" & csecs)
 		
 		tell application "Notes"
-			tell account "iCloud"
+			tell account "On My Mac"
 				tell folder thisFolderName
 					set localeditDate to the modification date of note j
 				end tell
